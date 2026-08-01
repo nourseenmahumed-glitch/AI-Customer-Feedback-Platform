@@ -216,3 +216,36 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# ==========================
+# AI Customer Feedback Platform
+# ==========================
+
+# Environment variables
+.env
+.env.*
+
+# VS Code
+.vscode/
+
+# Model weights
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+
+# Datasets
+datasets/raw/
+datasets/processed/
+datasets/interim/
+
+# Logs
+logs/
+*.log
+
+# Node.js
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
