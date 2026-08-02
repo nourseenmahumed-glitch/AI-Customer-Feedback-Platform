@@ -1,0 +1,43 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - member5-devops
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Show Project Files
+        run: ls -la
+
+      - name: Check Docker Compose
+        run: |
+          if [ -f docker-compose.yml ]; then
+            echo "✅ docker-compose.yml found"
+          else
+            echo "❌ docker-compose.yml not found"
+            exit 1
+          fi
+
+      - name: Check Required Folders
+        run: |
+          test -d backend
+          test -d frontend
+          test -d ai-engine
+          test -d database
+          test -d deployment
+          echo "✅ Project structure is correct"
+
+      - name: Finish
+        run: echo "🚀 CI Passed Successfully"
