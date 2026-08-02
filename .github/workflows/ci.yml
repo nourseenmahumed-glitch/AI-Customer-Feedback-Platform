@@ -18,8 +18,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Show Project Files
-        run: ls -la
+      - name: Show Current Directory
+        run: |
+          pwd
+          ls -la
+          find . -maxdepth 2
 
       - name: Check Docker Compose
         run: |
@@ -32,12 +35,15 @@ jobs:
 
       - name: Check Required Folders
         run: |
-          test -d backend
-          test -d frontend
-          test -d ai-engine
-          test -d database
-          test -d deployment
-          echo "✅ Project structure is correct"
+          for folder in backend frontend ai-engine database deployment
+          do
+            if [ -d "$folder" ]; then
+              echo "✅ $folder exists"
+            else
+              echo "❌ $folder NOT FOUND"
+              exit 1
+            fi
+          done
 
       - name: Finish
         run: echo "🚀 CI Passed Successfully"
