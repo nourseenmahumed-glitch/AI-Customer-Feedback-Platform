@@ -18,21 +18,25 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Show Project Files
-        run: ls -la
+      - name: Show Project Structure
+        run: |
+          pwd
+          ls -la
+          find . -maxdepth 2 -type d
 
-      - name: Check Docker Compose
+      - name: Check docker-compose file
         run: |
           test -f docker-compose.yml
           echo "✅ docker-compose.yml found"
 
-      - name: Check Project Structure
+      - name: Check Required Folders
         run: |
           test -d backend
-          test -d frontend
           test -d database
           test -d deployment
-          echo "✅ Project structure is correct"
+          test -d notebooks
+          test -d scripts
+          echo "✅ Required folders found"
 
       - name: Finish
         run: echo "🚀 CI Passed Successfully"
