@@ -18,23 +18,62 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Show Project Structure
+      - name: Show Current Directory
         run: |
+          echo "Current directory:"
           pwd
+
+      - name: Show Files
+        run: |
+          echo "Files in repository:"
+          ls -la
+
+      - name: Show Project Tree
+        run: |
           ls -R
 
-      - name: Check Required Folders
+      - name: Check Project Structure
         run: |
-          test -d deployment
-          test -d database
-          test -d notebooks
-          test -d scripts
-          echo "✅ Required folders found"
+          echo "Checking folders..."
+
+          if [ -d deployment ]; then
+            echo "✅ deployment exists"
+          else
+            echo "❌ deployment NOT found"
+          fi
+
+          if [ -d backend ]; then
+            echo "✅ backend exists"
+          else
+            echo "❌ backend NOT found"
+          fi
+
+          if [ -d database ]; then
+            echo "✅ database exists"
+          else
+            echo "❌ database NOT found"
+          fi
+
+          if [ -d notebooks ]; then
+            echo "✅ notebooks exists"
+          else
+            echo "❌ notebooks NOT found"
+          fi
+
+          if [ -d scripts ]; then
+            echo "✅ scripts exists"
+          else
+            echo "❌ scripts NOT found"
+          fi
 
       - name: Check Docker Compose
         run: |
-          test -f docker-compose.yml
-          echo "✅ docker-compose.yml found"
+          if [ -f docker-compose.yml ]; then
+            echo "✅ docker-compose.yml found"
+          else
+            echo "❌ docker-compose.yml NOT found"
+            exit 1
+          fi
 
       - name: Finish
-        run: echo "🚀 CI Passed Successfully"
+        run: echo "🚀 CI Finished"
