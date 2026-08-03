@@ -1,7 +1,7 @@
 name: CI Pipeline
 
 on:
-  push:
+ push:
     branches:
       - main
       - member5-devops
@@ -21,22 +21,20 @@ jobs:
       - name: Show Project Structure
         run: |
           pwd
-          ls -la
-          find . -maxdepth 2 -type d
-
-      - name: Check docker-compose file
-        run: |
-          test -f docker-compose.yml
-          echo "✅ docker-compose.yml found"
+          ls -R
 
       - name: Check Required Folders
         run: |
-          test -d backend
-          test -d database
           test -d deployment
+          test -d database
           test -d notebooks
           test -d scripts
-          echo "✅ Required folders found"
+          echo "Required folders found"
+
+      - name: Check Docker Compose
+        run: |
+          test -f docker-compose.yml
+          echo "docker-compose.yml found"
 
       - name: Finish
-        run: echo "🚀 CI Passed Successfully"
+        run: echo "CI Passed Successfully"
