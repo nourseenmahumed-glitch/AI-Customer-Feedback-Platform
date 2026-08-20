@@ -1,4 +1,12 @@
-from sqlalchemy import Column, Integer, String, Float, Text, DateTime
+from sqlalchemy import (
+    Column,
+    Integer,
+    String,
+    Float,
+    Boolean,
+    Text,
+    DateTime
+)
 from datetime import datetime
 
 from app.core.database import Base
@@ -9,18 +17,48 @@ class Review(Base):
 
     id = Column(Integer, primary_key=True, index=True)
 
-    place_name = Column(String, nullable=False)
-
-    reviewer_name = Column(String, nullable=False)
-
-    rating = Column(Float, nullable=False)
-
-    review_text = Column(Text, nullable=False)
+    branch = Column(String, nullable=False)
 
     review_date = Column(String)
 
-    sentiment = Column(String, default="Unknown")
+    original_review_text = Column(Text)
 
-    category = Column(String, default="General")
+    normalized_review_text = Column(Text)
+
+    sentiment_text = Column(String)
+
+    topic_text = Column(String)
+
+    overall_rating = Column(Float)
+
+    food_rating = Column(Float)
+
+    service_rating = Column(Float)
+
+    atmosphere_rating = Column(Float)
+
+    language_detected = Column(String)
+
+    is_mixed_language = Column(Boolean)
+
+    is_arabizi = Column(Boolean)
+
+    short_text_flag = Column(Boolean)
+
+    emoji_only_flag = Column(Boolean)
+
+    suspicious_text_flag = Column(Boolean)
+
+    duplicate_flag = Column(Boolean)
+
+    near_duplicate_flag = Column(Boolean)
+
+    text_quality_score = Column(Float)
+
+    review_word_count = Column(Integer)
+
+    review_char_count = Column(Integer)
+
+    review_length_category = Column(String)
 
     created_at = Column(DateTime, default=datetime.utcnow)
